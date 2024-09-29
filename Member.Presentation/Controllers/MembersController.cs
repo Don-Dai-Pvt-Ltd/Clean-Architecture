@@ -14,10 +14,32 @@ namespace Member.Presentation.Controllers
             _memberServices = memberServices;
         }
 
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet("getAllMembers")]
+        public IActionResult GetAllMembers()
         {
             return Ok(_memberServices.GetAllMembers());
+        }
+
+        [HttpGet("getMemberById")]
+        public IActionResult GetMemberById(int id)
+        {
+            return Ok(_memberServices.GetMemberById(id));
+        }
+        [HttpPost("addMember")]
+        public IActionResult AddMember(Domain.Member member)
+        {
+            return Ok(_memberServices.AddMembers(member));
+        }
+        [HttpDelete("deleteMember")]
+        public IActionResult DeleteMember(int id)
+        {
+            _memberServices.RemoveMembers(id);
+            return Ok("Member Deleted Successfully");
+        }
+        [HttpPut("updateMember")]
+        public IActionResult EditMember(int oldId, Domain.Member member)
+        {
+            return Ok(_memberServices.EditMembers(oldId, member));
         }
     }
 }
